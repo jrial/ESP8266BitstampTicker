@@ -171,6 +171,7 @@ void printPriceData(bool fresh, int x, int y, char* unit, String line, int stage
     tft.setTextColor(WHITE);
     tft.setCursor(0, y * 32 + 16);
     tft.print(low_high_spread, 2);
+    tft.print("%%");
 
     tft.setCursor(48, y * 32 + 16);
     if (pct_since_open >= 01) {
@@ -188,7 +189,7 @@ void printPriceData(bool fresh, int x, int y, char* unit, String line, int stage
       }
     }
     tft.print(abs(pct_since_open), 2);
-    tft.print("%");
+    tft.print("%%");
   }
 }
 
