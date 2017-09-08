@@ -1,6 +1,9 @@
 /*
  *  Fetch the latest BTC/ETH price from Bitstamp and display them on a 96x64px
  *  SSD1331 OLED display.
+ *  It depends on the SSD_13XX library by sumotoy, a faster alternative to the
+ *  Adafruit
+ *  Download link: https://github.com/sumotoy/SSD_13XX
  */
 #include <SPI.h>
 #include <SSD_13XX.h>
@@ -20,8 +23,8 @@
 const char* essid = "WIFI_NAME";
 const char* wifiKey = "WIFI_PASS";
 char* coinName1 = "BTC";
-char* coinName2 = "ETH";
 char* tickerUrl1 = "/api/v2/ticker/btceur/";
+char* coinName2 = "ETH";
 char* tickerUrl2 = "/api/v2/ticker/etheur/";
 
 SSD_13XX tft = SSD_13XX(__CS, __DC);
@@ -212,4 +215,3 @@ String fetchUrl(char* url) {
   Serial.println(line);
   return line;
 }
-
