@@ -116,21 +116,10 @@ void printPriceData(bool fresh, int x, int y, char* unit, String line, int stage
   tft.print(unit);
   tft.print(": ");
 
-  int highPos = line.indexOf("\"high\":") + 9;
-  int highEndPos = line.indexOf("\"", highPos);
-  String high = line.substring(highPos, highEndPos);
-
-  int lowPos = line.indexOf("\"low\":") + 8;
-  int lowEndPos = line.indexOf("\"", lowPos);
-  String low = line.substring(lowPos, lowEndPos);
-
-  int lastPos = line.indexOf("\"last\":") + 9;
-  int lastEndPos = line.indexOf("\"", lastPos);
-  String last = line.substring(lastPos, lastEndPos);
-
-  int openPos = line.indexOf("\"open\":") + 9;
-  int openEndPos = line.indexOf("\"", openPos);
-  String open = line.substring(openPos, openEndPos);
+  String high = getStringFromJSON("high", line);
+  String low = getStringFromJSON("low", line);
+  String last = getStringFromJSON("last", line);
+  String open = getStringFromJSON("open", line);
 
   // See if the price went up or down so we can color the price accordingly.
   float last_f = last.toFloat();
@@ -215,4 +204,12 @@ String fetchUrl(char* url) {
   Serial.println("Received data:");
   Serial.println(line);
   return line;
+}
+
+String getStringFromJSON(String needle, String haystack) {
+    String searchStr = "\"" + needle + "\":";
+    int beginPos = haystack.indexOf(searchStr) + searchStr.length() + 2;
+    int endPos = haystack.indexOf("\"", beginPos);
+    String result = haystack.substring(beginPos, endPos);
+    return result;
 }
