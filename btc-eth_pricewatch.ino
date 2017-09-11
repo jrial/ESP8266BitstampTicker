@@ -160,7 +160,7 @@ void printPriceData(bool fresh, int x, int y, char* unit, String line, int stage
       tft.setTextColor(RED);
       tft.print("-");
     } else {
-      tft.setTextColor(GREEN);
+      tft.setTextColor(WHITE);
       if (pct_since_open >=0) {
         tft.print("+");
       } else {
