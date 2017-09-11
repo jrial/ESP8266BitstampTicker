@@ -147,25 +147,31 @@ void printPriceData(bool fresh, int x, int y, char* unit, String line, int stage
     float low_f = low.toFloat();
     float low_high_spread = 100.0 * (high_f - low_f) / low_f;
 
-    tft.setTextColor(WHITE);
     tft.setCursor(0, y * 32 + 16);
+    if (fresh) {
+      tft.setTextColor(WHITE);
+    } else {
+      tft.setTextColor(YELLOW);
+    }
     tft.print(low_high_spread, 2);
     tft.print("%");
 
     tft.setCursor(48, y * 32 + 16);
-    if (pct_since_open >= 01) {
-      tft.setTextColor(GREEN);
-      tft.print("+");
-    } else if (pct_since_open <= -0.1){
-      tft.setTextColor(RED);
-      tft.print("-");
-    } else {
-      tft.setTextColor(WHITE);
-      if (pct_since_open >=0) {
-        tft.print("+");
+    if (fresh) {
+      if (pct_since_open >= 0.1) {
+        tft.setTextColor(GREEN);
+      } else if (pct_since_open <= -0.1){
+        tft.setTextColor(RED);
       } else {
-        tft.print("-");
+        tft.setTextColor(WHITE);
       }
+    } else {
+      tft.setTextColor(YELLOW);
+    }
+    if (pct_since_open >=0) {
+      tft.print("+");
+    } else {
+      tft.print("-");
     }
     tft.print(abs(pct_since_open), 2);
     tft.print("%");
