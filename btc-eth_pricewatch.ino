@@ -10,7 +10,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
 // Load configuration
-#include <config.h>
+#include "config.h"
 
 #define __CS  4   //GPIO4 (D2) or GPIO2
 #define __DC  5   //(D1)
