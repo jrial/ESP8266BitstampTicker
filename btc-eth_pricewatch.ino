@@ -9,23 +9,13 @@
 #include <SSD_13XX.h>
 #include <ESP8266WiFi.h>
 #include <WiFiClientSecure.h>
+// Load configuration
+#include <config.h>
 
 #define __CS  4   //GPIO4 (D2) or GPIO2
 #define __DC  5   //(D1)
 //SCLK, CLK:connect to D5
 //MOSI, RES:connect to D7
-
-
-/*
- * Define your network and preferred currencies here.
- * You can define two currencies.
- */
-const char* essid = "WIFI_NAME";
-const char* wifiKey = "WIFI_PASS";
-char* coinName1 = "BTC";
-char* tickerUrl1 = "/api/v2/ticker/btceur/";
-char* coinName2 = "ETH";
-char* tickerUrl2 = "/api/v2/ticker/etheur/";
 
 SSD_13XX tft = SSD_13XX(__CS, __DC);
 
@@ -67,7 +57,7 @@ void loop() {
   }
 
   // Switch screen every 10 seconds, 6 times. This means 1 refresh
-  // of the data pe minute. We do 2 requests, and Bitstamp has a
+  // of the data per minute. We do 2 requests, and Bitstamp has a
   // limit of 600 requests per 10 minutes before it blocks your IP.
   for (int i = 0; i < 6; i++) {
     tft.clearScreen();
